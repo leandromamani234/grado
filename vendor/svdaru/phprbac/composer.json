@@ -1,0 +1,38 @@
+{
+	"name" : "svdaru/phprbac",
+	"type" : "library",
+	"description" : "This is a fork from OWASP/rbac",
+	"keywords" : [
+		"rbac",
+		"owasp",
+		"security"
+	],
+	"homepage" : "http://phprbac.net/",
+	"license" : "Apache-2.0",
+	"authors" : [{
+			"name" : "AbiusX",
+			"email" : "me@abiusx.com",
+			"homepage" : "http://abiusx.com/",
+			"role" : "Lead Developer"
+		}, {
+			"name" : "Jesse Burns",
+			"email" : "jesse.burns@alliancecms.com",
+			"homepage" : "http://www.jbwebware.com",
+			"role" : "Developer"
+		}, {
+			"name" : "svda",
+			"email" : "info@svda.ru",
+			"role" : "Developer"
+		}		     
+	],
+	"autoload" : {
+		"psr-0" : {
+			"PhpRbac" : "PhpRbac/src"
+		}
+	},
+	"repositories" : [{
+            "type" : "vcs",
+            "url" : "https://github.com/svdaru/rbac.git"
+        }
+    ]
+}

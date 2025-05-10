@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'otb/registros',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => NULL,
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'otb/registros' => array(
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => NULL,
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.10.0',
+            'version' => '6.10.0.0',
+            'reference' => 'bf74d75a1fde6beaa34a0ddae2ec5fce0f72a144',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'svdaru/phprbac' => array(
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
+            'reference' => 'f2b2603e89d638fc3ae9df59f80b9da4b7abb3a3',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../svdaru/phprbac',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

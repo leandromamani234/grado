@@ -1,0 +1,19 @@
+{
+    "name": "otb/registros",
+    "description": "otb",
+    "autoload": {
+        "psr-4": {
+            "Otb\\Registros\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mortal.ln",
+            "email": "106820482+Moral3@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "svdaru/phprbac": "^2.0",
+        "phpmailer/phpmailer": "^6.10"
+    }
+}
