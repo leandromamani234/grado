@@ -16,11 +16,9 @@ class ModeloReportes {
         $sql = "SELECT 
                     p.id_persona, 
                     CONCAT(p.nombre, ' ', p.primer_apellido, ' ', p.segundo_apellido) AS nombre_completo, 
-                    s.estado,
-                    o.nombre AS nombre_otb
+                    s.estado
                 FROM persona p
-                INNER JOIN socios s ON p.id_persona = s.id_persona
-                INNER JOIN otb o ON s.id_otb = o.id_otb";
+                INNER JOIN socios s ON p.id_persona = s.id_persona";
 
         if ($estado) {
             $sql .= " WHERE s.estado = ?";
@@ -39,7 +37,7 @@ class ModeloReportes {
             $socios[] = [
                 'nombre_completo' => $row['nombre_completo'],
                 'estado' => $row['estado'],
-                'nombre_otb' => $row['nombre_otb']
+                'nombre_otb' => 'Barrio Fabril'  // Valor fijo
             ];
         }
 
@@ -48,6 +46,7 @@ class ModeloReportes {
         return $socios;
     }
 
+    // Reporte de deudas
     public function obtenerReporteDeudas($estado = null) {
         $this->con->CreateConnection();
         $conn = $this->con->getConnection();
@@ -84,9 +83,8 @@ class ModeloReportes {
         $this->con->CloseConnection();
         return $deudas;
     }
-    
 
-    // Reporte de recibos con toda la información
+    // Reporte de recibos
     public function obtenerReporteRecibos() {
         $this->con->CreateConnection();
         $conn = $this->con->getConnection();
@@ -117,7 +115,5 @@ class ModeloReportes {
         $this->con->CloseConnection();
         return $recibos;
     }
-    
-    
 }
 ?>

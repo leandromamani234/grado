@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// 🔐 Evitar que el navegador almacene páginas protegidas en caché
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+
 // Si no hay usuario autenticado, redirigir al login
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: ../vista/index.php");
@@ -7,7 +13,7 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 
 // Incluir la configuración de la base de datos
-require_once "../modelo/conexion/configDb.php"; // Ajustar la ruta correctamente
+require_once "../modelo/conexion/configDb.php"; // Ajusta la ruta si es necesario
 
 // Función para verificar si el usuario tiene uno de los roles permitidos
 function verificarRol($roles_permitidos) {
@@ -23,13 +29,12 @@ function verificarRol($roles_permitidos) {
     $user_rol = $stmt->fetch();
 
     if ($user_rol) {
-        // Verificar si el rol del usuario está en los roles permitidos
         if (!in_array($user_rol['id_rol'], $roles_permitidos)) {
-            header("Location: ../vista/no_permisos.php"); // Redirige si no tiene permiso
+            header("Location: ../vista/no_permisos.php");
             exit;
         }
     } else {
-        header("Location: ../vista/no_permisos.php"); // Redirige si no tiene rol asignado
+        header("Location: ../vista/no_permisos.php");
         exit;
     }
 }

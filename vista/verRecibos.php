@@ -149,7 +149,11 @@ if (isset($_GET['id_propiedad']) && is_numeric($_GET['id_propiedad'])) {
                         <td>
                             <a href="editarRecibo.php?id_recibo=<?php echo $recibo['id_recibo']; ?>" class="btn-accion btn-editar"><i class="bi bi-pencil-square"></i></a>
                             <a href="../controlador/controlador_eliminarRecibo.php?id=<?php echo $recibo['id_recibo']; ?>" class="btn-accion btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar este recibo?');"><i class="bi bi-trash-fill"></i></a>
-                            <a href="imprimirRecibo.php?id=<?php echo $recibo['id_recibo']; ?>" target="_blank" class="btn-accion btn-imprimir"><i class="bi bi-printer-fill"></i></a>
+                            <a href="imprimirRecibo.php?id=<?php echo $recibo['id_recibo']; ?>" class="btn btn-success" target="_blank">
+  🖨️ RawBT
+</a>
+
+
                         </td>
                     </tr>
                 <?php endforeach; ?>

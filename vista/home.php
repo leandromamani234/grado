@@ -3,7 +3,6 @@ include_once "cabecera.php";
 include_once "menu.php";
 require_once '../controlador/controlador_home.php';
 
-// Crear instancia del controlador para obtener las estadísticas
 $controladorHome = new ControladorHome();
 $estadisticas = $controladorHome->obtenerEstadisticas();
 ?>
@@ -18,7 +17,7 @@ $estadisticas = $controladorHome->obtenerEstadisticas();
     <title>Panel de Control</title>
     <style>
         body {
-            background-image: url('images/imag.jpg'); /* Asegúrate de que la ruta y la extensión son correctas */
+            background-image: url('images/imag.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -40,19 +39,49 @@ $estadisticas = $controladorHome->obtenerEstadisticas();
             height: 400px;
             margin-top: 30px;
         }
+
+        .alert-bienvenida {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 20px;
+            background-color: #198754;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            animation: fadeOut 1s ease-in-out forwards;
+            animation-delay: 3s;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
 
 <div class="container mt-5">
-    <h1 class="text-center">HOME</h1>
+
+    <!-- ✅ MENSAJE DE BIENVENIDA PERSONALIZADO -->
+    <?php if (isset($_SESSION['mensaje_bienvenida'])): ?>
+        <div class="alert-bienvenida" id="bienvenida">
+            <?php echo htmlspecialchars($_SESSION['mensaje_bienvenida']); ?>
+        </div>
+        <?php unset($_SESSION['mensaje_bienvenida']); ?>
+    <?php endif; ?>
+
+    <h1 class="text-center mt-3">HOME</h1>
 
     <div class="row text-center mt-4">
         <div class="col-md-3">
             <div class="card socios">
                 <h2>Socios</h2>
                 <h3><?php echo $estadisticas['total_socios']; ?></h3>
-                <p>&nbsp;</p> <!-- Espacio en blanco para mantener el diseño -->
+                <p>&nbsp;</p>
             </div>
         </div>
         <div class="col-md-3">
@@ -71,7 +100,6 @@ $estadisticas = $controladorHome->obtenerEstadisticas();
         </div>
     </div>
 
-    <!-- Gráfica -->
     <div class="chart-container">
         <canvas id="deudasChart"></canvas>
     </div>
@@ -86,7 +114,7 @@ $estadisticas = $controladorHome->obtenerEstadisticas();
             labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             datasets: [{
                 label: 'Deudas Acumuladas - 2024',
-                data: [1200, 1900, 3000, 500, 2000, 3000, 4000, 2500, 3200, 1500, 800, 2300], // Puedes actualizar estos datos dinámicamente si lo deseas
+                data: [1200, 1900, 3000, 500, 2000, 3000, 4000, 2500, 3200, 1500, 800, 2300],
                 backgroundColor: 'rgba(54, 162, 235, 0.6)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
@@ -94,17 +122,12 @@ $estadisticas = $controladorHome->obtenerEstadisticas();
         },
         options: {
             scales: {
-                y: {
-                    beginAtZero: true
-                }
+                y: { beginAtZero: true }
             }
         }
     });
 </script>
 
-<?php
-include_once "pie.php";
-?>
-
+<?php include_once "pie.php"; ?>
 </body>
 </html>

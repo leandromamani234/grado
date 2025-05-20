@@ -9,120 +9,132 @@
   <!-- Font-icon css-->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <title>Login</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(120deg, #6a93ff 0%, #1f4a87 100%);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(270deg, #6a93ff, #1f4a87, #6a93ff);
+    background-size: 600% 600%;
+    animation: animFondo 16s ease infinite;
+  }
 
-    .login-container {
-      background-color: rgba(255, 255, 255, 0.15); /* Fondo transparente */
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 350px;
-    }
+  @keyframes animFondo {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-    .login-container h3 {
-      color: white;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-    }
+  .login-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 360px;
+    backdrop-filter: blur(10px);
+  }
 
-    .login-container .input-group {
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
-      border-radius: 30px;
-      padding: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.4); /* Definir un borde claro */
-    }
+  .login-container h3 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 1.9rem;
+  }
 
-    .login-container .input-group i {
-      font-size: 1.5rem;
-      margin-right: 10px;
-      color: white;
-    }
+  .login-container .input-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
 
-    .login-container input {
-      border: none;
-      outline: none;
-      background: transparent; /* Fondo transparente */
-      color: black; /* Texto de color negro */
-      font-size: 1rem;
-      flex: 1;
-      padding-left: 10px; /* Añadir espacio dentro del input */
-    }
+  .login-container .input-group i {
+    font-size: 1.4rem;
+    margin-right: 10px;
+    color: white;
+  }
 
-    .login-container input::placeholder {
-      color: rgba(255, 255, 255, 0.6); /* Placeholder blanco translúcido */
-    }
+  .login-container input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    flex: 1;
+    padding: 8px;
+    border-radius: 30px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
 
-    .login-container button {
-      width: 100%;
-      padding: 12px;
-      border-radius: 30px;
-      background-color: rgba(76, 141, 255, 0.7); /* Botón más transparente */
-      color: white;
-      font-size: 1.2rem;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+  .login-container input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 6px rgba(0, 255, 255, 0.5);
+  }
 
-    .login-container button:hover {
-      background-color: rgba(51, 111, 204, 0.8); /* Botón más oscuro en hover */
-    }
+  .login-container input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
 
-    .login-container .forgot-password {
-      text-align: right;
-      margin-top: 10px;
-    }
+  .login-container button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
 
-    .login-container .forgot-password a {
-      color: rgba(255, 255, 255, 0.7);
-      text-decoration: none;
-    }
+  .login-container button:hover {
+    transform: scale(1.03);
+  }
 
-    .login-container .forgot-password a:hover {
-      text-decoration: underline;
-    }
+  .remember-me {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: white;
+  }
 
-    .remember-me {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 20px;
-      color: white;
-    }
+  .remember-me input {
+    margin-right: 5px;
+  }
 
-    .remember-me label {
-      display: flex;
-      align-items: center;
-    }
+  .forgot-password {
+    margin-top: 10px;
+    text-align: right;
+  }
 
-    .remember-me input {
-      margin-right: 5px;
-    }
+  .forgot-password a {
+    color: #d0eaff;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
 
-    .alert {
-      margin-top: 15px;
-      background-color: #dc3545;
-      padding: 10px;
-      border-radius: 5px;
-      color: white;
-    }
-  </style>
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+
+  .alert {
+    margin-top: 15px;
+    background-color: #e63946;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+  }
+</style>
+
 </head>
 
 <body>

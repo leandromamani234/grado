@@ -28,11 +28,13 @@ $numeroSerie = $reciboModel->obtenerSiguienteNumeroSerie(); // Este método ya l
             font-family: Arial, sans-serif;
         }
         .form-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 3rem;
+            background: rgba(255, 255, 255, 0.41);
+            padding: 5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
             max-width: 600px;
-            margin: 3rem auto;
-            border-radius: 10px;
+            margin: auto;
         }
         h1 {
             text-align: center;
@@ -104,7 +106,8 @@ $numeroSerie = $reciboModel->obtenerSiguienteNumeroSerie(); // Este método ya l
 
         <!-- Campos de lectura -->
         <label for="fecha_lectura">Fecha de Lectura:</label>
-        <input type="date" class="form-control" id="fecha_lectura" name="fecha_lectura" required>
+        <input type="date" class="form-control" id="fecha_lectura" name="fecha_lectura" required value="<?php echo date('Y-m-d'); ?>">
+
 
         <label for="lectura_anterior">Lectura Anterior:</label>
 <input type="number" step="0.01" class="form-control" id="lectura_anterior" value="0" readonly>

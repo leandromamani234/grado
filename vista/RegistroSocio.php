@@ -5,13 +5,11 @@ verificarRol([1,2,3,4]);
 include_once "cabecera.php";
 include_once "menu.php";
 require_once '../modelo/modelo_registroPersona.php';
-require_once '../modelo/modelo_registroOTB.php';
 require_once '../modelo/modelo_registroSocios.php';
 
 // Instancias de modelos
 $personaModel = new ModeloPersona();
 $socioModel = new ModeloSocios();
-$otbModel = new ModeloOTB();
 
 // Obtener todas las personas
 $personas = $personaModel->obtenerPersonas();
@@ -30,9 +28,11 @@ usort($personas, function($a, $b) {
     return strcmp($a['nombre'], $b['nombre']);
 });
 
-// Obtener la OTB única
-$otbs = $otbModel->obtenerOTBs();
-$otbUnica = $otbs[0]; // Se asume que solo hay una OTB
+// OTB fija: Barrio Fabril
+$otbUnica = [
+    'id_otb' => 1,
+    'nombre' => 'Barrio Fabril'
+];
 
 // Mensajes desde la sesión
 if (isset($_SESSION['mensaje'])) {
@@ -143,14 +143,13 @@ if (isset($_SESSION['mensaje'])) {
         <div class="form-group">
             <label for="id_persona">Persona:</label>
             <select class="form-control" id="id_persona" name="id_persona" required>
-    <option value="">Seleccione una persona</option>
-    <?php foreach ($personas as $p): ?>
-        <option value="<?php echo $p['id_persona']; ?>">
-            <?php echo htmlspecialchars($p['nombre'] . ' ' . $p['primer_apellido'] . ' ' . $p['segundo_apellido']); ?>
-        </option>
-    <?php endforeach; ?>
-</select>
-
+                <option value="">Seleccione una persona</option>
+                <?php foreach ($personas as $p): ?>
+                    <option value="<?php echo $p['id_persona']; ?>">
+                        <?php echo htmlspecialchars($p['nombre'] . ' ' . $p['primer_apellido'] . ' ' . $p['segundo_apellido']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
 
         <div class="form-group">
@@ -178,7 +177,7 @@ if (isset($_SESSION['mensaje'])) {
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.select-buscador').select2({
+        $('#id_persona').select2({
             placeholder: "Seleccione una persona...",
             allowClear: true,
             width: '100%'

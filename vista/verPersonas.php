@@ -33,7 +33,7 @@ $personas = $personaModel->obtenerPersonas();
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.41);
+            background: rgba(4, 109, 207, 0.41);
             padding: 4rem;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);

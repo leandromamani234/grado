@@ -1,18 +1,17 @@
 <?php
 session_start(); // Iniciar la sesión
 
-// Destruir todas las variables de sesión
-$_SESSION = array();
+// Limpiar variables y destruir sesión
+session_unset(); // ✅ Limpia todas las variables de sesión
+$_SESSION = array(); // Refuerza el vaciado
+session_destroy();   // Destruye la sesión
 
-// Destruir la sesión
-session_destroy();
-
-// Evitar que el navegador use el caché para mostrar páginas anteriores
+// Evitar que el navegador use caché
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Pragma: no-cache");
 
-// Redirigir al usuario a la página de inicio de sesión
+// Redirigir al login
 header("Location: ../vista/index.php");
 exit();
 ?>

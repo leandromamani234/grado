@@ -5,26 +5,32 @@ session_start();
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $socioModel = new ModeloSocios();
 
-// Acción: Eliminar socio
 if ($action === 'eliminar') {
-    $id_persona = intval($_GET['id_persona']);
-    $resultado = $socioModel->eliminarSocio($id_persona);
+    $id_persona = isset($_POST['id_persona']) ? intval($_POST['id_persona']) : 0;
 
-    $_SESSION['mensaje'] = $resultado === true 
-        ? "Socio eliminado con éxito."
-        : $resultado;
-    $_SESSION['tipo'] = $resultado === true ? "success" : "danger";
+    if ($id_persona > 0) {
+        $resultado = $socioModel->eliminarSocio($id_persona);
+
+        $_SESSION['mensaje'] = $resultado === true 
+            ? "Socio eliminado con éxito."
+            : $resultado;
+        $_SESSION['tipo'] = $resultado === true ? "success" : "danger";
+    } else {
+        $_SESSION['mensaje'] = "ID de socio no válido para eliminar.";
+        $_SESSION['tipo'] = "danger";
+    }
 
     header("Location: ../vista/verSocios.php");
     exit();
 }
 
-// Acción: Registrar socio (sin matrícula)
+
+// Acción: Registrar socio (sin matrícula y OTB fija)
 if ($action === 'registrar') {
-    if (isset($_POST["id_persona"], $_POST["estado"], $_POST["id_otb"])) {
+    if (isset($_POST["id_persona"], $_POST["estado"])) {
         $id_persona = intval($_POST["id_persona"]);
         $estado = htmlspecialchars(trim($_POST["estado"]));
-        $id_otb = intval($_POST["id_otb"]);
+        $id_otb = 1; // OTB fija: Barrio Fabril
 
         if ($id_persona <= 0) {
             $_SESSION['mensaje'] = "Error: No se seleccionó una persona válida.";
@@ -54,13 +60,12 @@ if ($action === 'registrar') {
     }
 }
 
-
-// Acción: Editar socio (si en el futuro también sin matrícula)
+// Acción: Editar socio (se mantiene la OTB fija)
 if ($action === 'editar') {
-    if (isset($_POST["id_persona_actual"], $_POST["id_persona_nueva"], $_POST["id_otb"])) {
+    if (isset($_POST["id_persona_actual"], $_POST["id_persona_nueva"])) {
         $id_persona_actual = intval($_POST["id_persona_actual"]);
         $id_persona_nueva = intval($_POST["id_persona_nueva"]);
-        $id_otb = intval($_POST["id_otb"]);
+        $id_otb = 1; // OTB fija
 
         $resultado = $socioModel->actualizarSocio($id_persona_actual, $id_persona_nueva, $id_otb);
 
@@ -79,7 +84,7 @@ if ($action === 'editar') {
     }
 }
 
-
+// Acción: Cambiar estado
 if ($action === 'cambiar_estado') {
     if (isset($_POST['id_persona'], $_POST['estado'])) {
         $id_persona = intval($_POST['id_persona']);
@@ -111,7 +116,6 @@ if ($action === 'cambiar_estado') {
         exit();
     }
 }
-
 
 // Si no se pasó ninguna acción válida
 header("Location: ../vista/verSocios.php");

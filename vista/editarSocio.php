@@ -7,7 +7,6 @@ include_once "menu.php";
 require_once '../modelo/modelo_registroSocios.php';
 require_once '../modelo/modelo_registroPersona.php';
 
-// Verificar si existe un id_persona en la URL
 if (!isset($_GET['id_persona'])) {
     echo "<p>Error: No se proporcionó un ID de socio válido.</p>";
     exit();
@@ -17,7 +16,6 @@ $id_persona = intval($_GET['id_persona']);
 $socioModel = new ModeloSocios();
 $socio = $socioModel->obtenerSocioPorId($id_persona);
 
-// Si no se encuentra el socio con el ID proporcionado
 if (!$socio) {
     echo "<p>Error: No se encontró información del socio con el ID proporcionado.</p>";
     exit();
@@ -96,6 +94,19 @@ $personasNoSocias[] = [
         .btn-primary:hover {
             background-color: #0056b3;
         }
+        .btn-secondary {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ccc;
+            background-color: #6c757d;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+            text-decoration: none;
+        }
         .alert {
             padding: 1rem;
             margin-bottom: 1rem;
@@ -126,10 +137,8 @@ $personasNoSocias[] = [
     <?php endif; ?>
 
     <form action="../controlador/controlador_socios.php?action=editar" method="POST">
-        <!-- ID del socio actual -->
         <input type="hidden" name="id_persona_actual" value="<?php echo htmlspecialchars($socio['id_persona']); ?>">
 
-        <!-- Selector de nueva persona -->
         <div class="form-group">
             <label for="id_persona_nueva">Persona:</label>
             <select class="form-control" id="id_persona_nueva" name="id_persona_nueva" required>
@@ -142,8 +151,12 @@ $personasNoSocias[] = [
             </select>
         </div>
 
-        <!-- Barrio fijo (id_otb dinámico) -->
-        <input type="hidden" name="id_otb" value="<?php echo htmlspecialchars($socio['id_otb']); ?>">
+        <!-- Barrio fijo -->
+        <input type="hidden" name="id_otb" value="1">
+        <div class="form-group">
+            <label>OTB:</label>
+            <input type="text" class="form-control" value="Barrio Fabril" readonly>
+        </div>
 
         <div class="form-group mt-3">
             <button type="submit" class="btn btn-primary">Actualizar Socio</button>

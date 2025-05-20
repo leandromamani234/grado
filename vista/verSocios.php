@@ -56,7 +56,6 @@ if ($socios === false) {
             text-align: center;
         }
 
-        /* Colores de fila según estado */
         tr.activo {
             background-color: #28a745;
             color: white;
@@ -127,8 +126,7 @@ if ($socios === false) {
         <?php echo htmlspecialchars($_SESSION['mensaje']); ?>
     </div>
     <?php unset($_SESSION['mensaje'], $_SESSION['tipo']); ?>
-<?php endif; ?>
-
+    <?php endif; ?>
 
     <table>
         <thead>
@@ -153,7 +151,7 @@ if ($socios === false) {
                             <button type="submit" name="estado" value="Suspendido" class="btn-estado">Suspendido</button>
                         </form>
                     </td>
-                    <td><?php echo $socio['otb']; ?></td>
+                    <td>Barrio Fabril</td>
                     <td>
                         <div class="acciones">
                             <a href="verDeudas.php?id_persona=<?php echo $socio['id_persona']; ?>" class="btn btn-deuda" title="Ver Deudas">

@@ -68,13 +68,13 @@ include_once "../includes/permisos_menu.php";
 
         .logo-container {
             text-align: center;
-            padding: 20px;
+            padding: 50px;
         }
 
         .logo-container img {
             width: 80px;
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
         }
 
         .logo-container h3 {
