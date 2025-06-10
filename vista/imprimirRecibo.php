@@ -16,27 +16,110 @@ if (!$recibo) {
     echo "Error: Recibo no encontrado.";
     exit();
 }
-
-// Encabezado RawBT
-header("Content-Type: text/plain; charset=utf-8");
-
-echo "================================\n";
-echo " JUNTA VECINAL \"BARRIO FABRIL\"  \n";
-echo "  PAPELETA DE CONSUMO DE AGUA   \n";
-echo "================================\n";
-
-echo "Nombre:          " . $recibo['nombre_completo'] . "\n";
-echo "N° de Casa:      " . $recibo['numero_casa'] . "\n";
-echo "Mes:             " . date("F Y", strtotime($recibo['fecha_lectura'])) . "\n";
-echo "Fecha Lectura:   " . $recibo['fecha_lectura'] . "\n";
-echo "--------------------------------\n";
-echo "Lectura Anterior: " . str_pad($recibo['lectura_anterior'], 4, "0", STR_PAD_LEFT) . "\n";
-echo "Lectura Actual:   " . str_pad($recibo['lectura_actual'], 4, "0", STR_PAD_LEFT) . "\n";
-echo "Consumo (m³):     " . number_format($recibo['consumo_m3'], 2) . "\n";
-echo "Monto a Pagar:    " . number_format($recibo['importe_bs'], 2) . " Bs\n";
-echo "--------------------------------\n";
-echo "Observaciones:    " . ($recibo['observaciones'] ?? 'Ninguna') . "\n";
-echo "================================\n";
-echo "     ¡Gracias por su pago!      \n";
-echo "================================\n";
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recibo de Agua</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .recibo {
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+
+        .info, .lecturas {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .info td, .lecturas td {
+            padding: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .linea {
+            border-top: 1px solid #000;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="recibo">
+    <h2>JUNTA VECINAL “BARRIO FABRIL”</h2>
+    <h3>RECIBO DE CONSUMO DE AGUA POTABLE</h3>
+    <div class="linea"></div>
+
+    <table class="info">
+        <tr>
+            <td><strong>Nombre:</strong></td>
+            <td><?= htmlspecialchars($recibo['nombre_completo']) ?></td>
+        </tr>
+        <tr>
+            <td><strong>N° de Casa:</strong></td>
+            <td><?= htmlspecialchars($recibo['numero_casa']) ?></td>
+        </tr>
+        <tr>
+            <td><strong>Mes:</strong></td>
+            <td><?= date("F Y", strtotime($recibo['fecha_lectura'])) ?></td>
+        </tr>
+        <tr>
+            <td><strong>Fecha de Lectura:</strong></td>
+            <td><?= $recibo['fecha_lectura'] ?></td>
+        </tr>
+    </table>
+
+    <table class="lecturas">
+        <tr>
+            <td><strong>Lectura Anterior:</strong></td>
+            <td><?= $recibo['lectura_anterior'] ?> m³</td>
+        </tr>
+        <tr>
+            <td><strong>Lectura Actual:</strong></td>
+            <td><?= $recibo['lectura_actual'] ?> m³</td>
+        </tr>
+        <tr>
+            <td><strong>Consumo:</strong></td>
+            <td><?= number_format($recibo['consumo_m3'], 2) ?> m³</td>
+        </tr>
+        <tr>
+            <td><strong>Monto a Pagar:</strong></td>
+            <td><strong><?= number_format($recibo['importe_bs'], 2) ?> Bs</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Observaciones:</strong></td>
+            <td><?= $recibo['observaciones'] ?? 'Ninguna' ?></td>
+        </tr>
+    </table>
+
+    <div class="linea"></div>
+    <div class="footer">
+        ¡Gracias por su pago!
+    </div>
+</div>
+
+<script>
+    window.print(); // Imprime automáticamente al abrir
+</script>
+
+</body>
+</html>

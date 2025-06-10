@@ -1,17 +1,16 @@
 <?php
-// Verificar si la sesión ya ha sido iniciada
+// Iniciar sesión si no ha sido iniciada
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Evitar el caché del navegador para que no pueda volver con el botón "atrás"
+// Evitar el caché del navegador para evitar el regreso con botón atrás
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Pragma: no-cache");
 
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
-    // Si no hay sesión, redirigir al login
     header("Location: ../vista/index.php");
     exit();
 }
@@ -20,25 +19,29 @@ if (!isset($_SESSION['usuario'])) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="description" content="Sistema de Administración">
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:site" content="@sistemadeagua">
-  <meta property="twitter:creator" content="@sistemadeagua">
+  <meta charset="utf-8">
+  <meta name="description" content="Sistema de Administración de Agua Potable">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Panel Admin - Sistema de Agua</title>
+
+  <!-- Redes sociales y SEO -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Panel de Administración">
   <meta property="og:title" content="Panel de Administración">
   <meta property="og:url" content="http://sistemadeagua.com">
   <meta property="og:image" content="http://sistemadeagua.com/hero-image.png">
   <meta property="og:description" content="Panel de administración del sistema de agua.">
-  <title>Panel Admin - Sistema de Agua</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="@sistemadeagua">
+  <meta property="twitter:creator" content="@sistemadeagua">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css"> <!-- NUEVO: Responsive -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
   <style>
-    /* Estilos de degradado azul inspirado en el cabello */
     .app-header {
       background: linear-gradient(90deg, #0D3B66, #2F80ED, #5DADE2);
       color: white;
@@ -82,7 +85,6 @@ if (!isset($_SESSION['usuario'])) {
       padding: 15px;
     }
 
-    /* Ajuste de iconos y texto */
     .bi-person-circle, .bi-box-arrow-right {
       font-size: 1.2em;
     }
@@ -90,26 +92,27 @@ if (!isset($_SESSION['usuario'])) {
 </head>
 
 <body class="app sidebar-mini">
-  <!-- Navbar-->
+  <!-- Navbar superior -->
   <header class="app-header">
     <a class="app-header__logo" href="home.php">
-      <img src="images/logo.png" alt="Logo"> <!-- Logo del sistema -->
+      <img src="images/logo.png" alt="Logo">
       Water System
     </a>
-    
-    <!-- Botón para ocultar/mostrar sidebar -->
+
+    <!-- Botón para toggle del sidebar -->
     <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Ocultar Sidebar"></a>
 
-    <!-- Navbar derecha: Botón de cerrar sesión -->
+    <!-- Menú superior derecho -->
     <ul class="app-nav ml-auto">
-      <!-- Icono del usuario y nombre -->
+      <!-- Usuario -->
       <li class="app-nav-item">
         <span class="app-nav__item">
-          <i class="bi bi-person-circle"></i> <?php echo $_SESSION['usuario']; ?>
+          <i class="bi bi-person-circle"></i>
+          <?php echo htmlspecialchars($_SESSION['usuario']); ?>
         </span>
       </li>
 
-      <!-- Botón para cerrar sesión -->
+      <!-- Cerrar sesión -->
       <li class="app-nav-item">
         <a class="app-nav__item" href="../controlador/logout.php">
           <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
@@ -118,7 +121,7 @@ if (!isset($_SESSION['usuario'])) {
     </ul>
   </header>
 
-  <!-- Script necesarios para funcionalidad del menú -->
+  <!-- Scripts base -->
   <script src="js/jquery-3.7.0.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,0 +1,90 @@
+/* responsive.css - Mostrar el sidebar completo como en escritorio */
+
+@media screen and (max-width: 768px) {
+  /* Sidebar igual que en escritorio */
+  .app-sidebar {
+    width: 230px !important;
+    overflow-x: visible !important;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: #222d32;
+  }
+
+  /* Mostrar texto de todos los ítems */
+  .app-sidebar .app-menu__item,
+  .app-sidebar .treeview-menu,
+  .app-sidebar .app-menu__label {
+    display: block !important;
+    white-space: normal;
+    text-align: left;
+    font-size: 16px;
+    color: white;
+  }
+
+  .app-sidebar .treeview-menu li a {
+    padding-left: 30px !important;
+  }
+
+  /* Quitar iconos flotantes si hay */
+  .sidebar-icon-only .app-menu__label {
+    display: inline !important;
+  }
+
+  /* Ajuste del header */
+  .app-header__logo {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+
+  .app-header__logo img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .app-nav__item {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  /* Paneles (dashboard) */
+  .panel-dashboard,
+  .card,
+  .tarjeta-panel {
+    width: 95% !important;
+    margin: 10px auto;
+    font-size: 14px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .grafico-barras {
+    display: none; /* ocultar si es pesado */
+  }
+
+  /* Formularios */
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  form {
+    padding: 0 10px;
+  }
+
+  .dashboard-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  footer,
+  .footer {
+    font-size: 12px;
+    text-align: center;
+  }
+}
